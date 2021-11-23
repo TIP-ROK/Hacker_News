@@ -51,7 +51,9 @@ def upvote(request, pk):
     post = Post.objects.get(pk=pk)
     if request.user in post.upvotes.all():
         post.upvotes.remove(request.user)
+        post.upvotes_count -= 1
         return Response(data={'message': f'{request.user.username}'}, status=status.HTTP_201_CREATED)
     else:
         post.upvotes.add(request.user)
+        post.upvotes_count += 1
         return Response(data={'message': ''}, status=status.HTTP_202_ACCEPTED)

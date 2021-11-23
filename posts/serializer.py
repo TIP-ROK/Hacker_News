@@ -13,10 +13,12 @@ class CommentSerializer(serializers.ModelSerializer):
 
 class PostSerializer(serializers.ModelSerializer):
     author = serializers.StringRelatedField(read_only=True)
+    upvotes_count = serializers.ReadOnlyField()
+    comments_count = serializers.ReadOnlyField()
 
     class Meta:
         model = Post
-        fields = ('id', 'title', 'link', 'created', 'author')
+        fields = ('id', 'title', 'link', 'created', 'author', 'upvotes_count', 'comments_count')
 
 
 class PostDetailSerializer(serializers.ModelSerializer):

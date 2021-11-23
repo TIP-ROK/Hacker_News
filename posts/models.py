@@ -7,6 +7,8 @@ class Post(models.Model):
     link = models.URLField()
     created = models.DateTimeField(auto_now_add=True)
     upvotes = models.ManyToManyField(User, related_name='upvotes')
+    upvotes_count = models.PositiveIntegerField(default=0)
+    comments_count = models.PositiveIntegerField(default=0)
     author = models.ForeignKey(User, on_delete=models.CASCADE,
                                related_name='posts')
 
