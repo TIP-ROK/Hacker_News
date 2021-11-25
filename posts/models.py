@@ -8,7 +8,6 @@ class Post(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     upvotes = models.ManyToManyField(User, related_name='upvotes')
     upvotes_count = models.PositiveIntegerField(default=0)
-    comments_count = models.PositiveIntegerField(default=0)
     author = models.ForeignKey(User, on_delete=models.CASCADE,
                                related_name='posts')
 
@@ -23,6 +22,7 @@ class Comment(models.Model):
                              related_name='comments')
     content = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
+    score = models.IntegerField(null=True, default=None)
 
     def __str__(self):
         return f'comment on {self.post.title}'
